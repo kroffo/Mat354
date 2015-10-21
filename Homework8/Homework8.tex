@@ -24,7 +24,7 @@ Let’s assume that it makes no difference which question is asked: There are so
 
 \item State the formula for $p(y)$, probability function for $Y = $ the number of students getting Question Version A who answer YES. List possible values for $y$.
 
-$$p(y) = {45 \choose y}\left(\frac{55}{95}\right)^y\left(1-\frac{55}{95}\right)^{45-y}$$\\
+$$p(y) = \frac{{55 \choose y}{40 \choose 45-y}}{{95 \choose 45}} \text{\hspace{.6in}} y \in \{5, 6, ..., 45\}$$\\
 
 \item Obtain the expected value, variance, and standard deviation for $Y$. (Nearest 0.01 for each.)\\
 
@@ -36,12 +36,12 @@ $$p(y) = {45 \choose y}\left(\frac{55}{95}\right)^y\left(1-\frac{55}{95}\right)^
 \begin{align*}
   V(Y) = \sigma^2 &= E(Y^2) - E(Y)^2\\
   &= \sum_{y=5}^{45}\left[y^2p(y)\right] - 26.05\\
-  &= 10.97
+  &= 5.8349
 \end{align*}
 
 \begin{align*}
   SD(Y) = \sigma &= \sqrt{\sigma^2}\\
-  &= 3.31
+  &= 2.4155
 \end{align*}
 \pagebreak
 
@@ -52,8 +52,8 @@ $$p(y) = {45 \choose y}\left(\frac{55}{95}\right)^y\left(1-\frac{55}{95}\right)^
 \end{lstlisting}
 
 \begin{align*}
-  l &= 12.80\\
-  u &= 39.30
+  l &= 16.39\\
+  u &= 35.71
 \end{align*}
 
 \includegraphics[keepaspectratio=true, scale=0.5]{3.png}\pagebreak
@@ -62,26 +62,27 @@ Probabilities to the nearest 0.0001 at least in what follows.
 
 \item Determine the probability that $Y$ falls within one standard deviation of the mean (i.e. find $P(\mu – \sigma \le Y \le \mu + \sigma)$)\\
 
-  $$\mu - \sigma = 22.7 \text{\hspace{.5in} and \hspace{.5in}}\mu + \sigma = 29.4$$
+  $$\mu - \sigma = 23.6371 \text{\hspace{.5in} and \hspace{.5in}}\mu + \sigma = 28.4682$$
 
-  Thus $$P(\mu – \sigma \le Y \le \mu + \sigma) = P(23 \le Y \le 29)$$ but this is just $$\sum_{y=23}^{29}p(y) = 0.7093$$
+  Thus $$P(\mu – \sigma \le Y \le \mu + \sigma) = P(24 \le Y \le 28)$$ but this is just $$\sum_{y=24}^{28}p(y) = 0.7017$$
 
 \item Determine $P(Y = 32)$ – the probability that exactly 32 of the students assigned to Question Version A answer YES.\\
 
   This is simply the result of plugging 32 in as the input to the function found in question 1:
 
 \begin{align*}
-  p(Y = 32) &= {45 \choose 32}\left(\frac{55}{95}\right)^32\left(1-\frac{55}{95}\right)^{45-32}\\
-  &= 0.0242
+  p(Y = 32) &= \frac{{55 \choose 32}{40 \choose 45-32}}{{95 \choose 32}}\\
+  &= 0.0079
 \end{align*}
 
 \item Find $P(Y \ge 32)$ – the probability that at least 32 of the students assigned to Question Version A answer YES.\\
 
-  This is simply the result of subtracting from 1 the sum the probabilities for 5, 6, 7, ... , 30 and 31 students assigned to Question Version A answering yes.
+  This is simply the result of subtracting from 1 the sum the probabilities for 5, 6, 7, ... , 30 and 31 students assigned to Question Version A answering yes. However, rather than adding these probabilities it is much easier to simply use R's phyper function:
 
 \begin{align*}
   p(Y \ge 32) &= 1 - \left[p(Y = 5) + p(Y = 6) + ... + p(Y = 31)\right]\\
-  &= 0.0480
+  &= 1 - \text{phyper}(31,55,40,45)\\
+  &= 0.0113
 \end{align*}
 \pagebreak
 
@@ -90,7 +91,7 @@ The experiment is conducted and y = 32 really occurs: We’re looking at the fol
 \begin{center}
 \begin{tabular} { |c|c c|c| }
 \hline
-&Lost \$20 Bill -  QVA    Lost Ticket - QVB&Total\\
+&Lost \$20 Bill -  QVA & Lost Ticket - QVB & Total\\
 \hline
 YES - Would pay to see play & 32 & & 55\\
 NO - Would not pay to see play && &\\
@@ -105,7 +106,7 @@ Total & 45 && 95\\
 \begin{center}
 \begin{tabular} { |c|c c|c| }
 \hline
-&Lost \$20 Bill -  QVA    Lost Ticket - QVB&Total\\
+&Lost \$20 Bill -  QVA & Lost Ticket - QVB & Total\\
 \hline
 YES - Would pay to see play & 32 & 23 & 55\\
 NO - Would not pay to see play & 13 & 27 & 40\\
