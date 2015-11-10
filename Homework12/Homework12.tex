@@ -1,0 +1,165 @@
+\documentclass{scrartcl}
+\usepackage{amsmath,amssymb,commath,graphicx,enumerate,listings}
+\setkomafont{disposition}{\normalfont\bfseries}
+
+\title{Mat 354}
+\subtitle{Homework 12}
+\author{Kenny Roffo}
+\date{Due November 9, 2015}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+
+\item \textbf{Expected Probability}\\
+  Consider a continuous random variable $Y$ with (continuous) distribution function $F(y)$. In class it was shown that $E[F(Y)] = \frac{1}{2}$.
+
+  \begin{enumerate}[a)]
+  \item Use similar tactics to derive an expression for $E[F^k(Y)]$ where $k>1$.\\
+
+    We note that a the product of a function with its derivative occurrs via the chain rule. Examining this situation, we see
+
+    \begin{align*}
+      E[F^k(Y)] &= \int_{all y}F^k(Y)F'(Y)dy\\
+      &= \left[\frac{1}{k+1}F^{k+1}(Y)\right]_{all y}\\
+      &= \frac{1}{k+1}(1) - \frac{1}{k+1}(0)\\
+      &= \frac{1}{k+1}
+    \end{align*}
+
+  \item Determine $V[F(Y)]$\\
+
+    By the above expression, we have
+    \begin{align*}
+      V[F(Y)] &= E(F^2(Y)) - E(F(Y))^2\\
+      &= \frac{1}{3} - \frac{1}{2^2}\\
+      &=\frac{4}{12} - \frac{3}{12}\\
+      &= \frac{1}{12}
+    \end{align*}
+
+  \item Do you have a conjecture on the distribution of the random variable $W = F(Y)$?\\
+
+    I may be missing something, but the above appears to apply for any continuous random variable, so I don't see how I would know anything more about it.\\
+
+  \item Suppose instead $Y$ is discrete with distribution function $F(y)$. Is $E[F(Y)] = 1⁄2$? Produce an argument for your assertion.\\
+
+    Nope. Roll a 6-sided die. The probability of any outcome is $\frac{1}{6}$ and the distribution function is $$F(y) = \frac{1}{y} , y\in\{1,2,3,4,5,6\}$$ And of course $$E(F(Y)) = \sum_{y=1}^6F(y)p(y) = \frac{7}{12}$$ Of course, $\frac{7}{12} \ne \frac{1}{2}$.
+
+  \end{enumerate}
+
+\item \textbf{A-maze-ing}\\
+
+  In a lab, a strain of mice are selectively bred for intelligence. And...it turns out that the resulting mice are “smarter than (other) mice”. These mice are timed going through a maze to reach a reward of food. The time (in seconds) required for any mouse is a random variable $Y$ with a density function given by
+  \begin{displaymath}
+    f(y) = \begin{cases} 
+      \frac{2b^2}{y^3} & b \le y \\
+      0 & b \nleq y
+    \end{cases}
+  \end{displaymath}
+  where $b$ is the minimum time needed to traverse the maze.
+
+  \begin{enumerate}[a)]
+  \item Determine the expected time required.\\
+
+    \begin{align*}
+      E(y) &= \lim_{a\rightarrow\infty}\int_b^a y\frac{2b^2}{y^3} dy\\
+      &= \lim_{a\rightarrow\infty}\left[-\frac{2b^2}{y}\right]_b^a\\
+      &= \lim_{a\rightarrow\infty}\left(-\frac{2b^2}{a}\right) + 2b\\
+      &= 2b
+    \end{align*}
+
+    The expected time for a mouse to traverse the maze is twice the minimum time required.\\
+
+  \item Which mice have the larger expected time: the intelligent variety of this exercise, or the mice of Exercise 4.15? Explain.\\
+
+    First we calculate the expected time for the mice from Exercise 4.15:
+
+    \begin{align*}
+      E(y) &= \lim_{a\rightarrow\infty}\int_b^\infty y\frac{b}{y^2} dy\\
+      &= \lim_{a\rightarrow\infty}\left[b\ln(y)\right]_b^a\\
+    \end{align*}
+
+    This limit does not exist, which means $E(y)$ does not exist. 
+
+  \end{enumerate}
+
+\item \textbf{(Finally) A Minimum}\\
+
+  A random variable $Y$ (the time until the first occurrence of “something”) has exponential distribution with parameter 2.
+  \begin{displaymath}
+    F(y) = \begin{cases} 
+      0 & y < 0 \\
+      1 - e^{-\frac{y}{2}} & y \ge 0
+    \end{cases}
+    \text{\hspace{0.3in}}
+    f(y) = \begin{cases} 
+      0 & y < 0\\
+      \frac{e^{-\frac{y}{2}}}{2} & y \ge 0
+    \end{cases}
+    \text{\hspace{0.3in}}
+    E(Y) = 2
+    \text{\hspace{0.3in}}
+    V(Y) = 4
+  \end{displaymath}
+  There are 5 independent runs of the experiment that result in the random variable $Y$. Let $L$ denote the minimum result for the 5 runs. Determine the following.
+
+  \begin{enumerate}[a)]
+  \item The distribution function for $L: F_l(l) = P(L \le l)$. (When handling the minimum, your first step is to attack the probability of the complementary event. Start with $P_l(L > l)$.)\\
+
+    It is apparent that $F_l(L) = 1 - P_l(L > l)$ and we see
+    \begin{align*}
+      1 - P_l(L > l) &= 1 - P(Y > l)^5\\
+      &= 1 - (1-F(l))^5
+    \end{align*}
+
+    Thus we have distribution function
+    \begin{displaymath}
+    F_l(l) = \begin{cases}
+      0 & l < 0 \\
+      1 - e^{-5l/2} & 0 \le l
+    \end{cases}
+    \end{displaymath}
+
+  \item The density for $L$.\\
+
+    \begin{align*}
+      \od{}{l}(1 - (1 - F(l))^5) &= 5(1 - F(l))^4F'(l)\\
+      &= 5(1 - F(l))^4f(l)\\
+    \end{align*}
+
+    So the density function is given by
+    \begin{displaymath}
+    f_l(l) = \begin{cases}
+      0 & l < 0 \\
+      \frac{5}{2}e^{-5l/2} & 0 \le l
+    \end{cases}
+    \end{displaymath}
+
+  \item The expected value and variance of $L$.\\
+
+    The following integrals were calculated using wolframalpha.com.
+    \begin{align*}
+      E(Y) &= \int_0^\infty l\left(\frac{5}{2}e^{-5l/2}\right) dl\\
+      &= \frac{2}{5} = 0.4
+    \end{align*}
+
+    \begin{align*}
+      E(Y^2) &= \int_0^\infty l^2\left(\frac{5}{2}e^{-5l/2}\right) dl\\
+      &= \frac{8}{25}
+    \end{align*}
+
+    Thus the variance is $V(Y) = \frac{4}{25} = 0.16$
+
+  \item Obtain values for the 0.005 and 0.995 quantiles of the distribution of the minimum. The probability is 0.99 that the minimum falls between these two values.\\
+
+    The expression for the $p^{th}$ quantile is found by solving $F(l)=p$ for $l$:
+    \begin{align*}
+      &1 - e^{-5l/2} = p\\
+      \implies&l = -\frac{2}{5}\ln(1 - p)
+    \end{align*}
+    
+    This implies $$\phi_{0.005} = 0.002005 \text{\hspace{1in}} \phi_{0.995} = 2.119327$$
+  \end{enumerate}
+\end{enumerate}
+\end{document}
+
