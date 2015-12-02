@@ -76,33 +76,27 @@
           &= [\frac{2}{3}y_2^3]_0^1\\
           &= \frac{2}{3}
         \end{align*}
-\ \\\ \\
-        I apologize for the next three being wrong. If I had had more time maybe I could figure them out, but I did not have more time.\\\ \\
+        
         
       \item Determine the marginal distribution for $Y_1$\\
-        Well, in this case $Y_1$ can be anywhere from 0 up to a given $y_1$, and $Y_2$ can be anywhere from $y_1$ to 1. So the marginal distribution must be:
+        All we've got to do is integrate the function over $Y_2$ ranging from its lower bound ($Y_1$) to 1!
         \begin{align*}
-          F_1(y_1) &= \int_{y_1}^{1}\int_0^{y_1}4y_2^2dy_1dy_2\\
-          &= \int_{y_1}^{1}4y_2^2y_1dy_2\\
-          &= \left[\frac{4}{3}y_2^3y_1\right]_{y_1}^1\\
-          &= \frac{4}{3}y_1 - \frac{4}{3}y_1^4
+          F_1(y_1) &= \int_{y_1}^14y_2^2dy_2\\
+          &= \frac{4}{3}\left(1 - y_1^3\right)
         \end{align*}
         
       \item Determine $P(Y_1<1/2)$\\
         According to my answer in the previous problem, this probability is:
         \begin{align*}
           P(Y_1<1/2) &= F_1(1/2)\\
-          &= \frac{4}{3}\left[1/2 - 1/16\right]\\
-          &= \frac{7}{12}
+          &= \frac{4}{3}\left(1 - 1/8\right)\\
+          &= \frac{7}{6}
         \end{align*}
         
+        Of course, this does not make sense! I must be doing this wrong! There is no sense in trying the next problem unless I can figure out these two.\\
+
       \item Determine the marginal distribution for $Y_2$
-        Here $Y_2$ ranges from 0 to $y_2$, and $Y_1$ ranges from 0 to $Y_2$:
-        \begin{align*}
-          F_2(y_2) &= \int_{0}^{y_2}\int_0^{y_2}4y_2^2dy_1dy_2\\
-          &= \int_{0}^{y_2}4y_2^3dy_2\\
-          &= y_2^4
-        \end{align*}
+        
         
     \end{enumerate}
 \end{enumerate}
