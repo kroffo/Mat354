@@ -16,6 +16,7 @@
 
     \begin{enumerate}[i.]
       \item Determine $P(\text{max}\{Y_1,Y_2\}<1/2)$\\
+
         This probability is found by integrating the density as $y_1$ goes from 0 to $y_2$ and $y_2$ goes from 0 to 1/2:
         \begin{align*}
           P(\text{max}\{Y_1,Y_2\}<1/2) &= \int_0^{1/2}\int_0^{y_2}4y_2^2dy_1dy_2\\
@@ -25,28 +26,83 @@
         \end{align*}
         
       \item Determine $P(Y_1+Y_2<1/2)$\\
-        
+
+        This is really the probability that the max of the two is less than 1/4. If that is not obvious to you, think about it. The only way for their sum to be 1/2 is for one to be at least 1/4. Thus we find this probability in the exact same manner as the first problem, just with different bounds:
+        \begin{align*}
+          P(Y_1+Y_2<1/2) &= \int_0^{1/4}\int_0^{y_2}4y_2^2dy_1dy_2\\
+          &= \int_0^{1/4}4y_2^3dy_2\\
+          &= [y_2^4]_0^{1/4}\\
+          &= \frac{1}{256}
+        \end{align*}
         
       \item Determine $P(Y_1Y_2<1/2)$\\
-        
+
+        This is the probability that that max of the two is, you guessed it, the square root of 1/2. Same problem. Different bounds. (Gee, I really hope I'm not wrong because I'm getting awfully cocky)
+        \begin{align*}
+          P(Y_1Y_2<1/2) &= \int_0^{\sqrt{1/2}}\int_0^{y_2}4y_2^2dy_1dy_2\\
+          &= \int_0^{\sqrt{1/2}}4y_2^3dy_2\\
+          &= [y_2^4]_0^{\sqrt{1/2}}\\
+          &= \frac{1}{1/4}
+        \end{align*}
         
       \item Determine $P(Y_1/Y_2<1/2)$\\
-        
-        
-      \item Determine $P(Y_1-Y_2<1/2)$\\
-        
-        
+
+        Now we have something interesting! $Y_1/Y_2$ is less than 1/2 if $Y_1<Y_2/2$. Of course, this will work for any values of $Y_1$ and $Y_2$ that satisfy this inequality, and so $Y_2$ can go anywhere from 0 to 1. Technically we should remove the case where $Y_2=0$, but the probability of that happening is basically 0 since we are dealing with continous variables, so we don't have to worry about it:
+        \begin{align*}
+          P(Y_1/Y_2<1/2) &= \int_0^{1}\int_0^{y_2/2}4y_2^2dy_1dy_2\\
+          &= \int_0^12y_2^3dy_2\\
+          &= [\frac{1}{2}y_2^4]_0^1\\
+          &= \frac{1}{2}
+        \end{align*}
+                
+      \item Determine $P(Y_2-Y_1<1/2)$\\
+
+        Just isolate $Y_1$ to get the upper bound:
+        \begin{align*}
+          P(Y_1-Y_2<1/2) &= \int_0^{1}\int_0^{y_2-2}4y_2^2dy_1dy_2\\
+          &= \int_0^14y_2^3 - 2y_2^2dy_2\\
+          &= [y_2^4-\frac{2}{3}y_2^3]_0^1\\
+          &= \frac{1}{3}
+        \end{align*}
+
+        I do wonder if this is actually right versus using 1/2 to 1 for the bounds of the outer integral. $Y_2$ cannot be less than 1/2 for this outcome, but perhaps the inner integral takes care of that? The probability then is 17/48 which is just a little bit higher than 1/3.
+
       \item Determine $P(\text{min}\{Y_1,Y_2\}<1/2)$\\
-        
+
+        Since $Y_2\ge Y_1$, this is really the $P(Y_1<1/2)$:
+        \begin{align*}
+          P(\text{min}\{Y_1,Y_2\}<1/2) &= \int_0^{1}\int_0^{1/2}4y_2^2dy_1dy_2\\
+          &= \int_0^12y_2^2dy_2\\
+          &= [\frac{2}{3}y_2^3]_0^1\\
+          &= \frac{2}{3}
+        \end{align*}
+\ \\\ \\
+        I apologize for the next three being wrong. If I had had more time maybe I could figure them out, but I did not have more time.\\\ \\
         
       \item Determine the marginal distribution for $Y_1$\\
-        
+        Well, in this case $Y_1$ can be anywhere from 0 up to a given $y_1$, and $Y_2$ can be anywhere from $y_1$ to 1. So the marginal distribution must be:
+        \begin{align*}
+          F_1(y_1) &= \int_{y_1}^{1}\int_0^{y_1}4y_2^2dy_1dy_2\\
+          &= \int_{y_1}^{1}4y_2^2y_1dy_2\\
+          &= \left[\frac{4}{3}y_2^3y_1\right]_{y_1}^1\\
+          &= \frac{4}{3}y_1 - \frac{4}{3}y_1^4
+        \end{align*}
         
       \item Determine $P(Y_1<1/2)$\\
-        
+        According to my answer in the previous problem, this probability is:
+        \begin{align*}
+          P(Y_1<1/2) &= F_1(1/2)\\
+          &= \frac{4}{3}\left[1/2 - 1/16\right]\\
+          &= \frac{7}{12}
+        \end{align*}
         
       \item Determine the marginal distribution for $Y_2$
-        
+        Here $Y_2$ ranges from 0 to $y_2$, and $Y_1$ ranges from 0 to $Y_2$:
+        \begin{align*}
+          F_2(y_2) &= \int_{0}^{y_2}\int_0^{y_2}4y_2^2dy_1dy_2\\
+          &= \int_{0}^{y_2}4y_2^3dy_2\\
+          &= y_2^4
+        \end{align*}
         
     \end{enumerate}
 \end{enumerate}
