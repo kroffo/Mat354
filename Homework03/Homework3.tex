@@ -1,0 +1,172 @@
+\documentclass{scrartcl}
+\usepackage{amsmath,amssymb,commath,graphicx,enumerate}
+\setkomafont{disposition}{\normalfont\bfseries}
+
+\title{Mat 354}
+\subtitle{Homework 3}
+\author{Kenny Roffo}
+\date{Due September 16, 2015}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item A box of hard candy contains 19 white candies, 8 red, and 15 blue. If you select 6 pieces of candy randomly from the box, without replacement, give the probability that...
+
+\begin{enumerate}[a)]
+
+\item Exactly 3 of the candies are white:\\
+$$ P = \frac{{19 \choose 3}{15 + 8 \choose 3}}{{42 \choose 6}} = 0.3271386$$
+
+\item There are two candies of each color:\\
+$$ P = \frac{{19 \choose 2}{8 \choose 2}{15 \choose 2}}{{42 \choose 6}} = 0.09583693$$
+
+\item Every one of the sampled candies are either red or white:\\
+$$ P = \frac{{19 + 8 \choose 6}}{{42 \choose 6}} = 0.05642815$$
+
+\item Each color is represented:\\
+$$ P = 1 - \left(\frac{{19 + 8 \choose 6}}{{42 \choose 6}} + \frac{{19 + 15 \choose 6}}{{42 \choose 6}} + \frac{{15 + 8 \choose 6}}{{42 \choose 6}}\right) = 0.6679504$$
+
+\end{enumerate}
+\pagebreak
+
+\item You are meeting two people at the \emph{Gare du Nord} in Paris, one arriving from Amsterdam, the other arriving from Brussels. The trains are scheduled to arrive at the same time. Let $A$ and $B$ denote the events that the trains you are meeting are on time. The probability the Amsterdam train is on time is $P(A) = 0.93$. The Brussels train is on time with probability 0.89; the probability both trains are late is 0.05. Find the probability that...
+
+\begin{enumerate}[a)]
+
+\item At least one train is on time:\\
+\begin{align*}
+P(A \cup B) &= 1 - P(\bar{A}\cap\bar{B})\\
+            &= 1 - 0.05\\
+            &= 0.9500
+\end{align*}
+
+\item Both trains are on time:\\
+\begin{align*}
+P(A \cap B) &= 1 - P(\bar{A}\cup\bar{B})\\
+            &= 1 - \left(P(\bar{A}) + P(\bar{B}) - P(\bar{A}\cap\bar{B})\right)\\
+            &= 1 - \left(0.07 + 0.11 - 0.05\right)\\
+            &= 0.8700
+\end{align*}
+
+\item Exactly one train is on time:\\
+\begin{align*}
+P(A \cup B - A \cap B) &= P(A \cup B) - P(A \cap B)\\
+                       &= 0.95 - 0.87\\
+                       &= 0.0800
+\end{align*}
+
+\item At least one train is late:\\
+\begin{align*}
+P(\bar{A \cap B}) &= 1 - P(A \cap B)\\
+                  &= 1 - 0.87\\
+                  &= 0.1300
+\end{align*}
+
+\item The Brussels train is on time given that the Amsterdam train is on time:\\
+\begin{align*}
+P(B|A) &= \frac{P(A \cap B)}{P(A)}\\
+       &= \frac{0.87}{0.93}\\
+       &= 0.9355
+\end{align*}
+
+\item Given the Brussels train is late, the Amsterdam train is on time:\\
+\begin{align*}
+P(A|\bar{B}) &= \frac{P(A\cap\bar{B})}{P(\bar{B})}\\
+             &= \frac{P(A - A \cap B)}{P(\bar{B})}\\
+             &= \frac{P(A)-P(A \cap B)}{P(\bar{B})}\\
+             &= \frac{0.93-0.87}{1-0.89}\\
+             &= \frac{0.06}{0.11}\\
+             &= 0.5455
+\end{align*}
+
+\item Given the Brussels train is late, the Amsterdam train is late:\\
+\begin{align*}
+P(\bar{A}|\bar{B}) &= \frac{\bar{A}\cap\bar{B}}{P(\bar{B})}\\
+                   &= \frac{P(\bar{A \cup B})}{P(\bar{B})}\\
+                   &= \frac{1 - P(A \cup B)}{P(\bar{B})}\\
+                   &= \frac{1 - 0.95}{1 - 0.89}\\
+                   &= \frac{0.05}{0.11}\\
+                   &= 0.4545
+\end{align*}
+
+\item The Brussels train is on time given that at least one of the trains is on time.\\
+\begin{align*}
+P(B|A \cup B) &= \frac{P(B \cap (A \cup B))}{P(A \cup B)}\\
+              &= \frac{P(B)}{P(A \cup B)}\\
+              &= \frac{0.89}{0.95}\\
+              &= 0.9368
+\end{align*}
+\pagebreak
+
+\item The Brussels train is on time given that exactly one of the trains is on time.\\
+\begin{align*}
+P(B|(A \cup B - A \cap B)) &= \frac{P(B \cap (A \cup B - A \cap B)}{P(A \cup B - A \cap B)}\\
+                           &= \frac{P(B - A \cap B)}{P(A \cup B - A \cap B)}\\
+                           &= \frac{P(B)-P(A \cap B)}{P(A \cup B - A \cap B)}\\
+                           &= \frac{0.89 - 0.87}{0.08}\\
+                           &= 0.2500
+\end{align*}
+
+\item The Brussels train is late given that at least one of the trains is late.\\
+\begin{align*}
+P(\bar{B}|\bar{A}\cup\bar{B}) &= \frac{P(\bar{B}\cap(\bar{A}\cup\bar{B})}{P(\bar{A}\cup\bar{B})}\\
+                               &= \frac{P(\bar{B})}{P(\bar{A}\cup\bar{B})}\\
+                               &= \frac{0.11}{0.13}\\
+                               &= 0.8462
+\end{align*}
+
+\item $A$ and $B$ are independent events. Explain.\\
+$$P(\text{A and B are independent events}) = 0$$
+Since $P(A \cap B) = 0.87 \ne 0.8277 = P(A)P(B)$ we know that $A$ and $B$ are not independent.
+\end{enumerate}
+
+\item Some combinations:
+
+\begin{enumerate}[a)]
+
+\item Compute the following pairs of values:
+\begin{enumerate}[i)]
+\item $7 \choose 2$ and $7 \choose 5$
+\begin{displaymath}
+{7 \choose 2} = \frac{7!}{(7-2)!2!} = 21 = \frac{7!}{(7-5)!5!} = {7 \choose 5}
+\end{displaymath}
+
+\item $13 \choose 5$ and $13 \choose 8$
+\begin{displaymath}
+{13 \choose 5} = \frac{13!}{(13-5)!5!} = 1287 = \frac{13!}{(13-8)!8!} = {13 \choose 8}
+\end{displaymath}
+\end{enumerate}
+
+\item What value $j$ not equal to 123456789 makes this true?
+\begin{displaymath}
+  {9876543210 \choose 123456789} = {9876543210 \choose j}
+\end{displaymath}
+The value $j = 9876543210-123456789 = 9753086421$
+
+\item $k$ is a positive integer. What integer other than $k-1$ correctly fills in the first blank? Simplify the expression to correctly fill in the second blank.
+\begin{displaymath}
+  {k \choose k-1} = {k \choose \text{\underline{\ \ \ }}} = \text{\underline{\ \ \ \ \ \ \ \ }}
+\end{displaymath}
+The integer 1 will correctly fill in the first blank. The second blank is filled in by $k$, that is $${k \choose k-1}={k \choose 1}=k$$\\
+
+The previous three parts of this problem all fall as a result that the task of choosing $k$ things out of a group of size $n$ is the same as choosing $n-k$ things to leave out, and taking the rest as your choice.
+
+\item Determine exact values for the following:
+\begin{enumerate}[i)]
+
+\item $\sum_{i=0}^3 {3 \choose i} = 8$
+
+\item $\sum_{i=0}^4 {4 \choose i} = 16$
+
+\item $\sum_{i=0}^8 {8 \choose i} = 256$
+
+\item $\sum_{i=0}^{1000} {1000 \choose i} = 2^{1000}$
+
+\item $\sum_{i=0}^8 {i+1 \choose i} = \sum_{i=0}^8 {i+1 \choose 1} = 9!$
+
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+
+\end{document}
+
