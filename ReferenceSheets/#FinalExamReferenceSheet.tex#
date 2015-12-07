@@ -1,0 +1,65 @@
+\documentclass{scrartcl}
+\usepackage{amsmath,amssymb,commath,graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[T1]{fontenc}
+\setkomafont{disposition}{\normalfont\bfseries}
+
+\title{Mat 354 - Exam 2 Reference Sheet}
+
+\begin{document}
+\begin{Large}\textbf{Discrete Random Variables}\end{Large}\\
+
+\textbf{Binomial} - Fixed number of trials, success or failure. $Y$ is number of trials until first success.
+$$P(y) = {n \choose y}p^y(1-p)^{n-y} \text{\hspace{0.5in}} F(y) = \text{pbinom($y$,size,prob)} \text{\hspace{0.5in}} E(Y) = np \text{\hspace{0.5in}} V(Y) = np(1-p)$$
+
+\textbf{Geometric} - Do trials until success. $Y$ is the number of of the first success trial.
+$$P(y) = (1-p)^{y-1}p \text{\hspace{0.5in}} F(y) = 1 - (1-p)^y \text{\hspace{0.5in}} E(Y) = \frac{1}{p} \text{\hspace{0.5in}} V(Y) = \frac{1-p}{p^2}$$
+
+\textbf{Hypergeometric} - $N$ objects. Simple Random Sample of $n$ objects. $r$ are type A, $N-r$ are type B. $Y$ is the number of type A in the $n$.
+$$P(y) = \frac{{r \choose y}{N-r \choose n-y}}{{N \choose n}} \text{\hspace{0.5in}} F(y) = \text{phyper($y,r,N-r,n$)} \text{\hspace{0.5in}} E(Y) = \frac{1}{p} \text{\hspace{0.5in}} V(Y) = \frac{1-p}{p^2}$$
+
+\textbf{Poisson} - Defined for $\lambda > 0$. The limit of the binomial distribution as $n\rightarrow\infty$ and $p \rightarrow0$. Think of a box of pollutant particles, slicing it into small slices to check if a particle is in each slice.
+$$P(y) = \frac{e^{-\lambda}\lambda^y}{y!} \text{\hspace{0.5in}} F(y) = \text{ppois($y,r,N-r,n$)} \text{\hspace{0.5in}} E(Y) = \lambda \text{\hspace{0.5in}} V(Y) = \lambda$$
+
+\textbf{Chebychev's Inequality}:  \hspace{0.5in} $1 - \frac{1}{k^2} < P(|Y-\mu|<\sigma k)$ \hspace{0.5in}$\frac{1}{k^2} \ge P(|Y-\mu|\ge\sigma k)$\\\ \\
+\begin{Large}\textbf{Continuous Random Variables}\end{Large}\\
+
+\textbf{Quantiles} - The $p^{th}$ quantile ($100p^{th}$ percentile) of $F(Y)$ is $\phi_p$ such that $F(\phi_p)=p$.\\
+
+\textbf{Density Function} - $f(y) = \od{}{y}F(y)$ \hspace{0.5in} $E(Y) = \int_{-\infty}^{\infty}yf(y)dy$ \hspace{0.5in} $V(Y) = E(Y^2) - E(Y)^2$\\
+
+\textbf{Exponential} - $F(y) = 1 - e^{-\frac{y}{\beta}}$, $\beta = \frac{1}{\lambda}$\\
+
+\textbf{Normal} - Density function: $\phi(z) = \frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}}$ is an even function $\left(\phi(-a)=\phi(a)\right)$ (This is the standard normal)\\
+Use qnorm to find quantiles. pnorm integrates the density function to give $F(y)$
+Define for constants $a$ and $b$ $$f(y) = \frac{1}{\sqrt{2\pi}b}e^{-\frac{(y-a)^2}{2b^2}}$$ If a random variable $Y$ has this density, then the random variable $Z=\frac{Y-a}{b}$ is standard normal.
+$Y$ has normal distribution with mean $\mu$ and variance $\sigma^2>0$ if $$f(y) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(y-\mu)^2}{2\sigma^2}}$$ Probabilities are found by rescaling.\\
+
+\textbf{Gamma Function} - $\Gamma(\alpha) = \int_0^\infty x^{\alpha-1}e^{-x}dx$ \hspace{0.5in} For an integer $k$, $\Gamma(k) = (k-1)!$
+$$\text{For } \alpha>0, \beta>0 \text{\hspace{0.5in}} f(y) = \begin{cases} \frac{y^{\alpha-1}e^{-y/\beta}}{\Gamma(\alpha)\beta^\alpha} & y>0\\ 0 & y \le 0 \end{cases} \text{\hspace{0.5in}} E(Y) = \alpha\beta \text{\hspace{0.5in}} V(Y) = \alpha\beta^2$$\\
+
+\textbf{Lack of Memory Property} - The following holds for continous exponential and discrete geometric distributions. Let $a>0, b>0$. Then $$P(Y>a+b|Y>a) = P(Y>a)$$
+
+\newpage
+
+\begin{Large}\textbf{Join Probability Functions}\end{Large}\\
+
+\textbf{Expectation of a function} - $$E\left(g\left(y_1,y_2\right)\right) = {\int\int}_{\mathbb{R}^2} g\left(y_1,y_2)\right)f\left(y_1,y_2\right)dy_1dy_2$$\\
+
+\textbf{Covariance} - The covariance of two random variables $Y_1, Y_2$ is $$\text{cov}\left(Y_1,Y_2\right) = E\left(Y_1Y_2\right) - E(Y_1)E(Y_2)$$
+
+\textbf{Correlation} - The Correlation between two random variables $Y_1, Y_2$ ranges from -1 to 1, and is given by $$\rho = \frac{\text{cov}\left(Y_1,Y_2\right)}{\sqrt{V(Y_1)V(Y_2)}}$$
+
+If two random variables $Y_1$ and $Y_2$ are independent, then their covariance is 0, and for functions $g$ and $h$ it is true that $$E\left[g(Y_1)h(Y_2)\right] = E\left[g(Y_1)\right]E\left[h(Y_2)\right]$$\\
+
+\textbf{Other facts and Useful Tools}\\
+
+$\text{cov}\left(a_1Y_1+b_1,a_2Y_2+b_2\right) = a_1a_2\text{cov}\left(Y_1,Y_2\right)$\\
+
+$\text{cov}\left(Y_1+Y_2,Y_3+Y_4\right) = \text{cov}\left(Y_1,Y_3\right) + \text{cov}\left(Y_1,Y_4\right) + \text{cov}\left(Y_2,Y_3\right) + \text{cov}\left(Y_2,Y_4\right)$\\
+
+$V\left(Y_1+Y_2\right) = V(Y_1) + V(Y_2) + \text{cov}\left(Y_1,Y_2\right)$\\
+
+$$C_n^N = \frac{N!}{(N-n)!n!} \text{\hspace{1in}} P_n^N = \frac{N!}{(N-n)!}
+
+\end{document}
